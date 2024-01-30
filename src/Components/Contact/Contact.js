@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export const Contact = () => {
 
@@ -108,14 +108,6 @@ export const Contact = () => {
         
                 const responseMessage = await response.text() ; // or response.json() if the server responds with JSON
                 console.log("Response Message:", responseMessage);
-                {/*setValidationMessages({
-                    firstName: '',
-                    lastName: '',
-                    phoneNumber: '',
-                    email: '',
-                    subject: '',
-                    message: ''
-                });*/}
                 setIsSubmitted(true);
         
             } catch (error) {

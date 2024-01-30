@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
-import upcomingEvents from './EventCardData';
 
 export const RenderStackedCard = ({ event }) => {
     if (!event) return null;
@@ -23,5 +22,6 @@ export const RenderStackedCard = ({ event }) => {
       </div>
     );
   };
+
   
   

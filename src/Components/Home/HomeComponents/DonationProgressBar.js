@@ -17,4 +17,4 @@ export const DonationProgressBar = ({ currentDonation, goal }) => {
       </div>
     </div>
   );
-};
+}; 

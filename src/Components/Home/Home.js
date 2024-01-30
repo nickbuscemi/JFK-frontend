@@ -1,12 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { DonationProgressBar } from './HomeComponents/DonationProgressBar';
-import verticalIMG1 from '../../assets/images/592x822/verticalIMG1.jpg'
-import verticalIMG3 from '../../assets/images/592x822/verticalIMG3.jpeg'
 import upcomingEvents from '../Events/EventsComponents/EventCardData';
 import { RenderStackedCard } from '../Events/EventsComponents/EventCardForHome';
 
-// WILL IMPORT DATA FROM API TO UPDATE PROGRESS BAR IN REAL TIME
+// WILL IMPORT DATA FROM API TO UPDATE PROGRESS BAR IN REAL TIME 
 
 export const Home = () => {
     /*const currentDonation = 17583; // Example current donation amount

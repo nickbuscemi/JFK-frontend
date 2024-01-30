@@ -15,7 +15,7 @@ export const Hero = () => {
     '/': 0,
     '/about': 1,  
     '/impact': 2,  
-    '/events': 3, 
+    '/events': 3,  
   };
 
   const index = pathToIndexMap[path];

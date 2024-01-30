@@ -1,8 +1,3 @@
-import { Hero } from "../Hero/Hero"
-import killeenpic4 from '../../assets/images/killeenpic4.jpeg'
-import killeenpic3 from '../../assets/images/killeenpic3.jpg'
-import killeenpic6 from '../../assets/images/killeenpic6.jpeg'
-import killeenpic8 from '../../assets/images/killeenpic8.jpg'
 import verticalIMG1 from '../../assets/images/592x822/verticalIMG1.jpg'
 import verticalIMG2 from '../../assets/images/592x822/verticalIMG2.jpeg'
 import verticalIMG3 from '../../assets/images/592x822/verticalIMG3.jpeg'

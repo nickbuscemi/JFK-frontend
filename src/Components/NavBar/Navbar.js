@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { FiMenu, FiArrowRight } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { NavLink as RouterNavLink, useMatch, useResolvedPath } from 'react-router-dom';
 import { DonationButton } from "../Stripe/DonationButton";
-import killeenlogolight from '../../assets/images/killeenlogolight.jpg';
 import killeenlogo from '../../assets/images/killeenlogo.jpg';
 import './NavBar.css';
 
@@ -13,7 +12,7 @@ export const FlipNavWrapper = () => {
     <div className="bg-transparent">
       <FlipNav />
     </div>
-  );
+  ); 
 };
 
 const FlipNav = () => {
@@ -156,7 +155,7 @@ const NavMenu = ({ isOpen, setIsOpen, setActiveLink }) => {
   );
 };
 
-const MenuLink = ({ text }) => {
+/*const MenuLink = ({ text }) => {
   return (
     <motion.a
       variants={menuLinkVariants}
@@ -175,26 +174,8 @@ const MenuLink = ({ text }) => {
       </motion.div>
     </motion.a>
   );
-};
-
-/*const menuVariants = {
-  open: {
-    scaleY: 1,
-    originY: 0,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.1,
-    },
-  },
-  closed: {
-    scaleY: 0,
-    originY: 0,
-    transition: {
-      when: "afterChildren",
-      staggerChildren: 0.1,
-    },
-  },
 };*/
+
 const menuVariants = {
   open: {
     opacity: 1,
@@ -221,7 +202,7 @@ const menuVariants = {
 };
 
 
-const menuLinkVariants = {
+/*const menuLinkVariants = {
   open: {
     y: 0,
     opacity: 1,
@@ -239,4 +220,4 @@ const menuLinkArrowVariants = {
   closed: {
     x: -4,
   },
-};
+};*/

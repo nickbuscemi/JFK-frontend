@@ -1,13 +1,8 @@
 import killeenpic1 from '../../../assets/images/killeenpic1.jpg';
 import killeenpic2 from '../../../assets/images/killeenpic2.jpg';
-import killeenpic5 from '../../../assets/images/killeenpic5.jpeg';
-import killeenpic4 from '../../../assets/images/killeenpic4.jpeg';
 import killeenpic6 from '../../../assets/images/killeenpic6.jpeg';
 import killeenpic7 from '../../../assets/images/killeenpic7.jpg';
-import killeenpic8 from '../../../assets/images/killeenpic8.jpg';
-import killeenpic9 from '../../../assets/images/killeenpic9.jpg';
-import killeenpic10 from '../../../assets/images/killeenpic10.jpg';
-import killeenpic11 from '../../../assets/images/killeenpic11.jpg';
+
 
 //mobile
 import killeenpic1Mobile from '../../../assets/images/600x900/killeenpic1Mobile.jpg';
@@ -35,7 +30,7 @@ export const HeroCarouselObj = [
         src: killeenpic6,
         mobileSrc: killeenpic5Mobile,
         title: 'Impact',
-        caption: "Our Goals and What We\'ve Acheived",
+        caption: "Our Goals and What We've Acheived",
     },
     {
         id: 4,
@@ -45,3 +40,4 @@ export const HeroCarouselObj = [
         caption: "Join Our Community",
     }
 ];
+

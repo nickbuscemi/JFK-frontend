@@ -1,6 +1,5 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { useState, useEffect } from 'react';
 import ScrollToTop from './utils/ScrollToTop';
 import { FlipNavWrapper } from './Components/NavBar/Navbar';
 import { Hero } from './Components/Hero/Hero'
@@ -17,9 +16,9 @@ import { EventDetail } from './Components/Events/EventsComponents/EventDetail';
 
 
 //import {loadStripe} from '@stripe/stripe-js';
+ 
 
-
-function App() {
+function App() { 
 
   return (
     <Router>

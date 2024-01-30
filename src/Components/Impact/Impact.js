@@ -4,7 +4,7 @@ import verticalIMG3 from '../../assets/images/592x822/verticalIMG3.jpeg'
 import verticalIMG4 from '../../assets/images/592x822/verticalIMG4.jpg'
 
 export const Impact = () => {
-    return (
+    return ( 
         <div>
             <section className="dark:bg-deepCarolina">
                 <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:pb-16 lg:px-6">

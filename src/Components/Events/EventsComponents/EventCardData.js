@@ -1,7 +1,3 @@
-import killeenpic4 from '../../../assets/images/killeenpic4.jpeg'
-import killeenpic1 from '../../../assets/images/killeenpic1.jpg'
-import killeenpic2 from '../../../assets/images/killeenpic2.jpg'
-
 import NYCmarathonHero from '../../../assets/images/eventImages/NYCmarathonHero.jpeg'
 import BethpageGolfCourseHero from '../../../assets/images/eventImages/BethpageGolfCourseHero.jpeg'
 import blockpartyHero from '../../../assets/images/eventImages/blockpartyHero.jpeg';
@@ -17,7 +13,7 @@ class Event {
   }
 
   createSlug() {
-    return `/events/${this.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')}`;
+    return `/events/${this.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')}`;
   }
 }
 
