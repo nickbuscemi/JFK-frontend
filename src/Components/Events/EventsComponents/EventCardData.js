@@ -3,11 +3,12 @@ import BethpageGolfCourseHero from '../../../assets/images/eventImages/BethpageG
 import blockpartyHero from '../../../assets/images/eventImages/blockpartyHero.jpeg';
 
 class Event {
-  constructor(id, name, date, location, image) {
+  constructor(id, name, date, location, registrationFormComponent, image) {
     this.id = id;
     this.name = name;
     this.date = date;
     this.location = location;
+    this.registrationFormComponent = registrationFormComponent;
     this.image = image;
     this.link = this.createSlug();
   }
@@ -18,13 +19,9 @@ class Event {
 }
 
 const upcomingEvents = [
-  new Event(1, 'Annual Golf Tournament', 'September 2024', 'Bethpage', BethpageGolfCourseHero),
-  new Event(2, 'NYC Marathon', 'November 2024', 'New York City', NYCmarathonHero),
-  new Event(3, 'Annual Block Party', 'June 2024', 'Islip', blockpartyHero),
-  new Event(1, 'Annual Golf Tournament', 'September 2024', 'Bethpage', BethpageGolfCourseHero),
-  new Event(1, 'Annual Golf Tournament', 'September 2024', 'Bethpage', BethpageGolfCourseHero),
-  new Event(1, 'Annual Golf Tournament', 'September 2024', 'Bethpage', BethpageGolfCourseHero),
-
+  new Event(1, 'Annual Golf Tournament', 'September 2024', 'Bethpage', 'GolfTournamentRegistrationForm',BethpageGolfCourseHero),
+  new Event(2, 'NYC Marathon', 'November 2024', 'New York City', 'MarathonRegistrationForm', NYCmarathonHero),
+  new Event(3, 'Annual Block Party', 'June 2024', 'Islip', 'BlockPartyRegistrationForm', blockpartyHero),
   // Add more events
 ];
 
