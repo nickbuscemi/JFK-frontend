@@ -11,13 +11,8 @@ import { Home } from './Components/Home/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Contact } from './Components/Contact/Contact';
 import { EventDetail } from './Components/Events/EventsComponents/EventDetail';
-//import Payment from './Components/Stripe/Payment';
-//import Completion from './Components/Stripe/Completion';
-
-
-//import {loadStripe} from '@stripe/stripe-js';
+import { SignUpFormHandler } from './Components/RegistraionForms/SignUpHandler';
  
-
 function App() { 
 
   return (
@@ -63,14 +58,18 @@ function App() {
               </>
             }
             />
+            <Route path="/events/:eventName/sign-up-form" element={
+              <>
+                <SignUpFormHandler />
+              </>
+            }
+            />
             <Route path="/contact" element={
               <>
                 <Contact />
               </>
             }
             />
-            {/*<Route path="/test" element={<Payment stripePromise={stripePromise} />} />
-            <Route path="/completion" element={<Completion stripePromise={stripePromise} />} />*/}
           </Routes>
           
         <div className='footer-wrapper'>

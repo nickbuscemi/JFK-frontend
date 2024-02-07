@@ -45,10 +45,11 @@ export const EventDetail = () => {
                     <div>
                       <h1 className="mb-5 text-5xl font-bold">{event.name}</h1>
                     </div>
+                    <p className="mb-5 text-xl font-bold">{event.description}</p>
                     <div>
-                      <button className="whitespace-nowrap overflow-hidden text-overflow-ellipsis text-white bg-carolina hover:text-deepCarolina hover:bg-white focus:outline-none focus:ring-4 focus:ring-carolina-300 rounded-full text-md px-5 py-2.5 text-center dark:bg-carolina dark:hover:bg-white dark:focus:ring-carolina">
+                      {/*<button className="whitespace-nowrap overflow-hidden text-overflow-ellipsis text-white bg-carolina hover:text-deepCarolina hover:bg-white focus:outline-none focus:ring-4 focus:ring-carolina-300 rounded-full text-md px-5 py-2.5 text-center dark:bg-carolina dark:hover:bg-white dark:focus:ring-carolina">
                         Sign Up!
-                      </button>
+              </button>*/}
                     </div>
                   </div>
                 </div>

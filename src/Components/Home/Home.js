@@ -14,7 +14,7 @@ export const Home = () => {
     const goal = 10000; // Example goal
 
 
-    const mostRecentEvent = upcomingEvents[1];
+    const mostRecentEvent = upcomingEvents[0];
 
     // In your React component
     useEffect(() => {
@@ -37,7 +37,6 @@ export const Home = () => {
             <div className='pb-10 pt-6'>
             <h1 className='flex justify-center text-carolina lg:mb-8 mb-4 lg:text-3xl font-bold'>Help us reach our goal for the year!</h1>
             <DonationProgressBar currentDonation={currentDonation} goal={goal} />
-            {/* Other content */}
             </div>
             <section className="dark:bg-white">
                 <div className="flex flex-col lg:grid lg:grid-cols-2 grid-cols-1 gap-16 items-center justify-center py-8 px-8 lg:px-0 mx-auto max-w-screen-xl lg:pb-16 lg:px-6">

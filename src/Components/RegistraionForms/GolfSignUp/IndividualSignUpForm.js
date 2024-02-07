@@ -1,17 +1,17 @@
 import React from 'react';
 import { useState } from 'react'
 
-export const MarathonRegistrationForm = () => {
+export const IndividualSignUpForm = () => {
 
     const [formData, setFormData] = useState({
       firstName: '',
       lastName: '',
       phoneNumber: '',
       email: '',
-      subject: 'Marathon Inquiry',
-      fundraisingGoal: false, // New field for fundraising goal
-      marathonReason: '', // New field for marathon reason
-      additionalNames: '' // New field for additional names
+      subject: 'Golf Tournament Registration',
+      registrationType: 'Solo', // Default selection
+      teammates: [], // Holds details of teammates
+      teamname: ''
     });
 
     const [validationMessages, setValidationMessages] = useState({
@@ -19,20 +19,32 @@ export const MarathonRegistrationForm = () => {
         lastName: '',
         phoneNumber: '',
         email: '',
-        marathonReason: '',
-        additionalNames: ''
+        teammates: [], // Holds details of teammates
     });
     
 
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleChange = (e) => {
-      if (e.target.type === "checkbox") {
-          setFormData({ ...formData, [e.target.name]: e.target.checked });
-      } else {
-          setFormData({ ...formData, [e.target.name]: e.target.value });
-      }
+        const { name, value } = e.target;
+    
+        if (name === "registrationType") {
+            if (value === "4-Some") {
+                setFormData({ ...formData, [name]: value, teammates: [] });
+            } else if (value === "Teammate") {
+                // Ensure only one teammate input is initialized
+                setFormData({ ...formData, [name]: value, teammates: [{ firstName: '', lastName: '', email: '' }] });
+            } else {
+                setFormData({ ...formData, [name]: value, teammates: [] });
+            }
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
+    
+    
+    
+      
 
     const isFormValid = () => {
 
@@ -42,8 +54,7 @@ export const MarathonRegistrationForm = () => {
             lastName: '',
             phoneNumber: '',
             email: '',
-            marathonReason: '',
-            additionalNames: ''
+            teammates: formData.teammates.map(() => ({ firstName: '', lastName: '', email: '' })) // Initialize teammate errors
         };
 
         // Email Validation
@@ -72,18 +83,6 @@ export const MarathonRegistrationForm = () => {
         if (!formData.phoneNumber.trim() || !phoneRegex.test(formData.phoneNumber)) {
             errors.phoneNumber = "Invalid phone number"
             isValid = false;
-        }
-    
-        // Message Validation (with minimum and maximum length)
-        if (!formData.marathonReason.trim() || formData.marathonReason.length < 20 || formData.marathonReason.length > 500) {
-            errors.marathonReason = "Message is required and should be 20 to 500 characters long."
-            isValid = false;
-        }
-
-        // Message Validation (with minimum and maximum length)
-        if (formData.additionalNames.length > 500) {
-          errors.additionalNames = "Message should not be longer than 500 characters."
-          isValid = false;
         }
     
         // If all checks pass
@@ -130,20 +129,57 @@ export const MarathonRegistrationForm = () => {
           lastName: '',
           phoneNumber: '',
           email: '',
-          subject: 'Marathon Inquiry',
-          fundraisingGoal: false, 
-          marathonReason: '',
-          additionalNames: ''
+          subject: 'Golf Tournament Registration ',
+          registrationType: 'Solo', // Default selection
+          teammates: [], // Holds details of teammates
+          teamname: ''
         });
         setValidationMessages({
           firstName: '',
           lastName: '',
           phoneNumber: '',
           email: '',
-          marathonReason: '',
-          additionalNames: ''
         });
     };
+
+    const handleAddTeammate = () => {
+        // Only add a new teammate if there are fewer than 3
+        if (formData.teammates.length < 3) {
+            setFormData({
+                ...formData,
+                teammates: [...formData.teammates, { firstName: '', lastName: '', email: '' }]
+            });
+        }
+    };
+
+    const handleDeleteTeammate = (indexToDelete) => {
+        setFormData({
+            ...formData,
+            teammates: formData.teammates.filter((_, index) => index !== indexToDelete)
+        });
+    };
+    
+    
+    
+
+    const handleTeammateChange = (index, e) => {
+        const updatedTeammates = formData.teammates.map((teammate, i) => {
+          if (i === index) {
+            // Assuming your input names are formatted like "firstName0", "lastName0", "email0" for the first teammate,
+            // this will correctly update the respective property by removing digits from the input name.
+            const propertyName = e.target.name.replace(/[0-9]/g, '');
+            return { ...teammate, [propertyName]: e.target.value };
+          }
+          return teammate;
+        });
+      
+        setFormData({
+          ...formData,
+          teammates: updatedTeammates
+        });
+      };
+      
+      
 
     if (isSubmitted) {
         return (
@@ -224,53 +260,94 @@ export const MarathonRegistrationForm = () => {
                     </div>
 
                     <div className="px-2 mb-5">
-                      <label htmlFor="fundraisingGoal" className="mb-3 block text-base font-medium text-deepCarolina">
-                          Are you okay with a $3,500 fundraising goal?
-                      </label>
-                        <input 
-                            type="checkbox" 
-                            name="fundraisingGoal" 
-                            id="fundraisingGoal" 
-                            checked={formData.fundraisingGoal} 
+                        <label htmlFor="registrationType" className="mb-3 block text-base font-medium text-deepCarolina">Registration Type</label>
+                        <select
+                            name="registrationType"
+                            id="registrationType"
+                            value={formData.registrationType}
                             onChange={handleChange}
-                            className="rounded-md" 
-                        />
+                            className="w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
+                        >
+                            <option value="Solo">Solo</option>
+                            <option value="4-Some">Part of a 4-Some</option>
+                            <option value="Teammate">Teammate</option>
+                        </select>
                     </div>
 
-                    {/* Marathon Reason */}
-                    <div className="mb-5">
-                        <label htmlFor="marathonReason" className="mb-3 block text-base font-medium text-deepCarolina">Why do you want to run the marathon?</label>
-                        <textarea 
-                            rows="4" 
-                            name="marathonReason" 
-                            id="marathonReason" 
-                            placeholder="Your reason for running" 
-                            value={formData.marathonReason} 
-                            onChange={handleChange}
-                            className="w-full resize-none rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
-                        ></textarea>
-                        {validationMessages.marathonReason && <div className="text-red-500">{validationMessages.marathonReason}</div>}
-                    </div>
+                    {formData.registrationType === '4-Some' && (
+                        <div className="px-2 mb-5">
+                            <label htmlFor="teamName" className="mb-3 block text-base font-medium text-deepCarolina">Team Name</label>
+                            <input
+                                type="text"
+                                name="teamName"
+                                id="teamName"
+                                placeholder="Team Name"
+                                value={formData.teamName}
+                                onChange={handleChange}
+                                className="w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
+                            />
+                        </div>
+                    )}
 
-                    {/* Additional Names */}
-                    <div className="mb-5">
-                        <label htmlFor="additionalNames" className="mb-3 block text-base font-medium text-deepCarolina">
-                            If securing more than one entry, please include their names
-                        </label>
-                        <textarea 
-                            rows="3" 
-                            name="additionalNames" 
-                            id="additionalNames" 
-                            placeholder="Additional names" 
-                            value={formData.additionalNames} 
-                            onChange={handleChange}
-                            className="w-full resize-none rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
-                        ></textarea>
-                        {validationMessages.additionalNames && <div className="text-red-500">{validationMessages.additionalNames}</div>}
-                    </div>
-    
+                    {(formData.registrationType === '4-Some' || formData.registrationType === 'Teammate') && (
+                        <>
+                            {formData.teammates.map((teammate, index) => (
+                                <div key={index} className="mb-5">
+                                    {/* Teammate input fields */}
+                                    <div key={index} className="mb-5">
+                                        <h4 className="mb-3 text-lg font-medium text-deepCarolina">Teammate {index + 1}</h4>
+                                            <input
+                                            type="text"
+                                            name={`teammateFirstName${index}`}
+                                            placeholder="First Name"
+                                            value={teammate.firstName}
+                                            onChange={e => handleTeammateChange(index, e)}
+                                            className="mb-3 w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
+                                            />
+                                            <input
+                                            type="text"
+                                            name={`teammateLastName${index}`}
+                                            placeholder="Last Name"
+                                            value={teammate.lastName}
+                                            onChange={e => handleTeammateChange(index, e)}
+                                            className="mb-3 w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
+                                            />
+                                            <input
+                                            type="email"
+                                            name={`teammateEmail${index}`}
+                                            placeholder="Email"
+                                            value={teammate.email}
+                                            onChange={e => handleTeammateChange(index, e)}
+                                            className="w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
+                                            />
+                                        {formData.registrationType === '4-Some' && (
+                                            <button
+                                                type="button"
+                                                onClick={() => handleDeleteTeammate(index)}
+                                                className="my-3 p-2 text-white bg-carolina hover:bg-deepCarolina rounded-md"
+                                            >
+                                                - Remove Teammate
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+
+                            {formData.registrationType === '4-Some' && formData.teammates.length < 3 && (
+                                
+                                <button
+                                    type="button"
+                                    onClick={handleAddTeammate}
+                                    className="my-3 p-2 text-white bg-carolina hover:bg-deepCarolina rounded-md"
+                                >
+                                    + Add Teammate
+                                </button>
+                            )}
+                        </>
+                    )}
                     {/* Submit Button */}
                     <div className='flex justify-center items-center'>
+                        
                         <button 
                             type="submit" 
                             className="whitespace-nowrap overflow-hidden text-overflow-ellipsis text-white bg-carolina hover:bg-deepCarolina focus:outline-none focus:ring-4 focus:ring-carolina-300 font-extrabold rounded-full text-md px-5 py-2.5 text-center dark:bg-carolina dark:hover:bg-deepCarolina dark:focus:ring-carolina"
@@ -284,3 +361,4 @@ export const MarathonRegistrationForm = () => {
     );
     
 };
+
