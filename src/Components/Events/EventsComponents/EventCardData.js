@@ -1,6 +1,6 @@
 import NYCmarathonHero from '../../../assets/images/eventImages/NYCmarathonHero.jpeg'
 import BethpageGolfCourseHero from '../../../assets/images/eventImages/BethpageGolfCourseHero.jpeg'
-import blockPartyHero from '../../../assets/images/eventImages/blockPartyHero.jpeg'
+import blkprtyhero from '../../../assets/images/eventImages/blkprtyhero.jpeg'
 
 class Event {
   constructor(id, name, date, location, registrationFormComponent, image, description) {
@@ -44,7 +44,7 @@ const upcomingEvents = [
     'June 7th, 2024', 
     'Islip', 
     'BlockPartyRegistrationForm', 
-    blockPartyHero,
+    blkprtyhero,
     'Block Party Description'
   ),
   // Add more events
