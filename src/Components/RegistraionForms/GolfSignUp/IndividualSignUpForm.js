@@ -9,9 +9,7 @@ export const IndividualSignUpForm = () => {
       phoneNumber: '',
       email: '',
       subject: 'Golf Tournament Registration',
-      registrationType: 'Solo', // Default selection
-      teammates: [], // Holds details of teammates
-      teamname: ''
+      
     });
 
     const [validationMessages, setValidationMessages] = useState({
@@ -28,24 +26,9 @@ export const IndividualSignUpForm = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
     
-        if (name === "registrationType") {
-            if (value === "4-Some") {
-                setFormData({ ...formData, [name]: value, teammates: [] });
-            } else if (value === "Teammate") {
-                // Ensure only one teammate input is initialized
-                setFormData({ ...formData, [name]: value, teammates: [{ firstName: '', lastName: '', email: '' }] });
-            } else {
-                setFormData({ ...formData, [name]: value, teammates: [] });
-            }
-        } else {
-            setFormData({ ...formData, [name]: value });
-        }
+        setFormData({ ...formData, [name]: value });
     };
     
-    
-    
-      
-
     const isFormValid = () => {
 
         let isValid = true;
@@ -54,7 +37,6 @@ export const IndividualSignUpForm = () => {
             lastName: '',
             phoneNumber: '',
             email: '',
-            teammates: formData.teammates.map(() => ({ firstName: '', lastName: '', email: '' })) // Initialize teammate errors
         };
 
         // Email Validation
@@ -98,13 +80,20 @@ export const IndividualSignUpForm = () => {
         console.log(formData);
        
         if (isFormValid()) {
+
+            const indivdualFormData = {
+                ...formData,
+                teamId: null,
+                teamName: "",
+                isLeader: false
+            }
             try {
                 const response = await fetch('http://localhost:4242/submit-marathon-form', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(indivdualFormData)
                 });
         
                 if (!response.ok) {
@@ -130,9 +119,6 @@ export const IndividualSignUpForm = () => {
           phoneNumber: '',
           email: '',
           subject: 'Golf Tournament Registration ',
-          registrationType: 'Solo', // Default selection
-          teammates: [], // Holds details of teammates
-          teamname: ''
         });
         setValidationMessages({
           firstName: '',
@@ -142,44 +128,6 @@ export const IndividualSignUpForm = () => {
         });
     };
 
-    const handleAddTeammate = () => {
-        // Only add a new teammate if there are fewer than 3
-        if (formData.teammates.length < 3) {
-            setFormData({
-                ...formData,
-                teammates: [...formData.teammates, { firstName: '', lastName: '', email: '' }]
-            });
-        }
-    };
-
-    const handleDeleteTeammate = (indexToDelete) => {
-        setFormData({
-            ...formData,
-            teammates: formData.teammates.filter((_, index) => index !== indexToDelete)
-        });
-    };
-    
-    
-    
-
-    const handleTeammateChange = (index, e) => {
-        const updatedTeammates = formData.teammates.map((teammate, i) => {
-          if (i === index) {
-            // Assuming your input names are formatted like "firstName0", "lastName0", "email0" for the first teammate,
-            // this will correctly update the respective property by removing digits from the input name.
-            const propertyName = e.target.name.replace(/[0-9]/g, '');
-            return { ...teammate, [propertyName]: e.target.value };
-          }
-          return teammate;
-        });
-      
-        setFormData({
-          ...formData,
-          teammates: updatedTeammates
-        });
-      };
-      
-      
 
     if (isSubmitted) {
         return (
@@ -259,93 +207,7 @@ export const IndividualSignUpForm = () => {
                         </div>
                     </div>
 
-                    <div className="px-2 mb-5">
-                        <label htmlFor="registrationType" className="mb-3 block text-base font-medium text-deepCarolina">Registration Type</label>
-                        <select
-                            name="registrationType"
-                            id="registrationType"
-                            value={formData.registrationType}
-                            onChange={handleChange}
-                            className="w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
-                        >
-                            <option value="Solo">Solo</option>
-                            <option value="4-Some">Part of a 4-Some</option>
-                            <option value="Teammate">Teammate</option>
-                        </select>
-                    </div>
-
-                    {formData.registrationType === '4-Some' && (
-                        <div className="px-2 mb-5">
-                            <label htmlFor="teamName" className="mb-3 block text-base font-medium text-deepCarolina">Team Name</label>
-                            <input
-                                type="text"
-                                name="teamName"
-                                id="teamName"
-                                placeholder="Team Name"
-                                value={formData.teamName}
-                                onChange={handleChange}
-                                className="w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
-                            />
-                        </div>
-                    )}
-
-                    {(formData.registrationType === '4-Some' || formData.registrationType === 'Teammate') && (
-                        <>
-                            {formData.teammates.map((teammate, index) => (
-                                <div key={index} className="mb-5">
-                                    {/* Teammate input fields */}
-                                    <div key={index} className="mb-5">
-                                        <h4 className="mb-3 text-lg font-medium text-deepCarolina">Teammate {index + 1}</h4>
-                                            <input
-                                            type="text"
-                                            name={`teammateFirstName${index}`}
-                                            placeholder="First Name"
-                                            value={teammate.firstName}
-                                            onChange={e => handleTeammateChange(index, e)}
-                                            className="mb-3 w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
-                                            />
-                                            <input
-                                            type="text"
-                                            name={`teammateLastName${index}`}
-                                            placeholder="Last Name"
-                                            value={teammate.lastName}
-                                            onChange={e => handleTeammateChange(index, e)}
-                                            className="mb-3 w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
-                                            />
-                                            <input
-                                            type="email"
-                                            name={`teammateEmail${index}`}
-                                            placeholder="Email"
-                                            value={teammate.email}
-                                            onChange={e => handleTeammateChange(index, e)}
-                                            className="w-full rounded-md border border-carolina bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-deepCarolina focus:shadow-md"
-                                            />
-                                        {formData.registrationType === '4-Some' && (
-                                            <button
-                                                type="button"
-                                                onClick={() => handleDeleteTeammate(index)}
-                                                className="my-3 p-2 text-white bg-carolina hover:bg-deepCarolina rounded-md"
-                                            >
-                                                - Remove Teammate
-                                            </button>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-
-                            {formData.registrationType === '4-Some' && formData.teammates.length < 3 && (
-                                
-                                <button
-                                    type="button"
-                                    onClick={handleAddTeammate}
-                                    className="my-3 p-2 text-white bg-carolina hover:bg-deepCarolina rounded-md"
-                                >
-                                    + Add Teammate
-                                </button>
-                            )}
-                        </>
-                    )}
-                    {/* Submit Button */}
+                    
                     <div className='flex justify-center items-center'>
                         
                         <button 
