@@ -85,7 +85,7 @@ export const FourSomeSignUpForm = () => {
        
         if (isFormValid()) {
             try {
-                const response = await fetch('http://localhost:4242/submit-golf-4some-form', {
+                const response = await fetch('http://localhost:4242/submit-golf-team-form', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const plans = [
   {
     title: 'Individual',
-    price: '99',
+    price: '100',
     features: [
       '1 Individual Entry',
       'Access to Tournament',
@@ -14,7 +14,7 @@ const plans = [
   },
   {
     title: '4-Some',
-    price: '349',
+    price: '400',
     features: [
       '4 Person Team Entry',
       'Access to Tournament',
@@ -24,7 +24,7 @@ const plans = [
   },
   {
     title: 'Dinner Only',
-    price: '49',
+    price: '50',
     features: [
       'Dinner Event Access',
       'No Tournament Entry',
@@ -34,7 +34,7 @@ const plans = [
   },
   {
     title: 'Sponsor',
-    price: '499',
+    price: '500',
     features: [
       'Sponsorship Recognition',
       'Promotional Opportunities',

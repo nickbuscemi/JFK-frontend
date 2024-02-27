@@ -63,7 +63,7 @@ function App() {
                 <SignUpFormHandler />
               </>
             }
-            />
+          />*
             <Route path="/contact" element={
               <>
                 <Contact />
